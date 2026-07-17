@@ -1,0 +1,15 @@
+{
+  "viewport": [1280, 800],
+  "window": { "top": 96, "titleH": 52, "urlLabel": "localhost:8000" },
+  "eyebrow": "DEMONSTRAÇÃO · INEMAIMG",
+  "ctaNarration": "Isso é conteúdo do INEMA ponto CLUB. Acesse: inema ponto club.",
+  "ctaCaption": "Mais conteúdo em inema.club",
+  "steps": [
+    { "shot": "00-home.png", "intro": true, "target": null, "click": false, "caption": "inemaimg · gerando uma imagem do zero" },
+    { "shot": "01-prompt.png", "target": {"x":129,"y":252,"w":482,"h":96}, "click": false, "caption": "1 · Escreva um prompt detalhado" },
+    { "shot": "02-size512.png", "target": {"x":179,"y":501,"w":44,"h":26}, "click": true, "caption": "2 · Escolha o tamanho — 512²" },
+    { "shot": "03-height768.png", "target": {"x":375,"y":563,"w":236,"h":43}, "click": false, "caption": "3 · Ajuste a altura → 768" },
+    { "shot": "03-height768.png", "target": {"x":129,"y":701,"w":482,"h":42}, "click": true, "caption": "4 · Clique em Gerar" },
+    { "shot": "04-resultado.png", "target": {"x":668,"y":128,"w":484,"h":324}, "click": false, "zoom": true, "caption": "Pronto — cavalo na praia · 512×768" }
+  ]
+}

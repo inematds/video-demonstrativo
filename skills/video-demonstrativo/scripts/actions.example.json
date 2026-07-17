@@ -1,0 +1,54 @@
+{
+  "url": "http://localhost:8000/",
+  "viewport": [1280, 800],
+  "window": { "top": 96, "titleH": 52, "urlLabel": "localhost:8000" },
+  "eyebrow": "DEMONSTRAÇÃO · INEMAIMG",
+  "ctaNarration": "Isso é conteúdo do INEMA ponto CLUB. Acesse: inema ponto club.",
+  "ctaCaption": "Mais conteúdo em inema.club",
+  "steps": [
+    {
+      "id": "home",
+      "intro": true,
+      "caption": "inemaimg · gerando uma imagem do zero",
+      "narration": "Esse é o inemaimg, um playground de geração de imagem. Vamos criar uma do zero, em poucos cliques."
+    },
+    {
+      "id": "prompt",
+      "do": { "type": "fill", "selector": "textarea", "value": "A majestic chestnut horse galloping along a tropical beach at golden hour, mane flowing, water splashing, cinematic, ultra detailed, photorealistic" },
+      "target": "textarea",
+      "caption": "1 · Escreva um prompt detalhado",
+      "narration": "Primeiro, escreva um prompt bem detalhado. Aqui: um cavalo castanho galopando numa praia tropical, ao pôr do sol."
+    },
+    {
+      "id": "size",
+      "do": { "type": "clickText", "tag": "button", "text": "512²" },
+      "target": { "tag": "button", "text": "512²" },
+      "click": true,
+      "caption": "2 · Escolha o tamanho — 512²",
+      "narration": "Depois, escolha o tamanho. Vamos de quinhentos e doze."
+    },
+    {
+      "id": "height",
+      "do": { "type": "setValue", "selector": "input[name=height]", "value": "768" },
+      "target": "input[name=height]",
+      "caption": "3 · Ajuste a altura → 768",
+      "narration": "E ajuste a altura para setecentos e sessenta e oito, deixando a imagem em retrato."
+    },
+    {
+      "id": "gerar",
+      "do": { "type": "clickText", "tag": "button", "text": "Gerar" },
+      "target": { "tag": "button", "text": "Gerar" },
+      "click": true,
+      "caption": "4 · Clique em Gerar",
+      "narration": "Agora é só clicar em Gerar e deixar o modelo trabalhar."
+    },
+    {
+      "id": "resultado",
+      "do": { "type": "wait", "ms": 160000 },
+      "target": { "tag": "h2", "text": "RESULTADO" },
+      "zoom": true,
+      "caption": "Pronto — cavalo na praia · 512×768",
+      "narration": "Em segundos, o resultado: o seu cavalo correndo na praia, pronto pra baixar."
+    }
+  ]
+}
