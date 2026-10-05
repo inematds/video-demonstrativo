@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>video-demonstrativo — narrated walkthrough of your app, from the link</title>
+<meta content="A skill that generates demo videos (walkthroughs) of a web application from the app link: it navigates the actual app, captures real screens, and creates a narrated video with a browser frame, animated cursor, and zoom. All local, with no API key." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;display:block}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:16px;margin-bottom:26px}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+</style>
+<link href="https://inematds.github.io/video-demonstrativo/guia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/video-demonstrativo/guia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/video-demonstrativo/guia/es/" hreflang="es" rel="alternate"/></head>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<nav><div class="wrap">
+<a class="brand" href="#top"><span class="emoji">🎬</span> video-demonstrativo</a>
+<span class="sep">|</span>
+<span class="clubpro">
+<a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
+<span class="sep">-</span>
+<a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a>
+</span>
+<div class="links">
+<a class="sec" href="#oque">What it is</a>
+<a class="sec" href="#fluxo">How it works</a>
+<a class="sec" href="#pre">Prerequisites</a>
+<a class="sec" href="#guia">User guide</a>
+<a class="sec" href="#exemplos">Examples</a>
+<a class="sec" href="#roadmap">Roadmap</a>
+<button aria-label="Switch theme" class="tgl" id="themeToggle" title="Switch theme">🌙</button>
+<a class="btn" href="https://github.com/inematds/video-demonstrativo" rel="noopener" target="_blank">GitHub</a>
+</div>
+</div></nav>
+<header class="hero" id="top">
+<div class="glow"></div>
+<div class="wrap">
+<div>
+<span class="chip">Skill · Video / AI · v1.1.0</span>
+<h1>From the app link to <span class="amb">narrated walkthrough</span>.</h1>
+<p class="lead">You provide the URL. Claude Code navigates the actual app, captures real screens step by step, and creates a video with a browser frame, animated cursor, and narration. All on your machine, with no API key.</p>
+<div class="cta">
+<a class="btn" href="#guia">Start the guide</a>
+<a class="btn ghost" href="https://github.com/inematds/video-demonstrativo" rel="noopener" target="_blank">View on GitHub</a>
+</div>
+</div>
+<figure><img alt="video-demonstrativo project cover — web application demo video" src="../assets/hero.png"/></figure>
+</div>
+</header>
+<section id="oque"><div class="wrap">
+<span class="chip">What it is</span>
+<h2>A skill that shows the real app in use</h2>
+<p class="sub">This isn't motion graphics explaining a concept (that's the skill <code>video-explicativo</code>): here are the video screens <strong>are your app</strong>, actually captured with an automated browser. The result is a 35–50s, 16:9 walkthrough in PT-BR that ends with the INEMA.CLUB CTA.</p>
+<div class="grid g3">
+<div class="card"><h3>🖱️ Cursor that hits the button</h3><p>During capture, the skill takes the <em>real bounding box</em> of each target with <code>getBoundingClientRect</code>. The animated cursor lands in the center of the control—with a pulse and ripple on click. That’s what makes it look like a professional recording, not a screenshot with an arrow over it.</p></div>
+<div class="card"><h3>🔒 100% local, no API key</h3><p>Capture via <code>agent-browser</code> (Playwright), HTML→MP4 rendering via HyperFrames, PT-BR narration via TTS Kokoro (voice <code>pf_dora</code>) running on the machine itself. No paid calls, no external services.</p></div>
+<div class="card"><h3>⏱️ Single source of timing</h3><p>The generator reads the <code>steps.json</code> and measures the duration of each WAV with <code>ffprobe</code>. There is no hand-built timing table: audio and animation are created in sync, and the ambience loops prevent a silent tail at the end.</p></div>
+</div>
+</div></section>
+<section id="fluxo"><div class="wrap">
+<span class="chip">How it works</span>
+<h2>Capture first, animate later</h2>
+<p class="sub">HyperFrames rendering is deterministic — with no network access during rendering. That's why the site is never loaded live inside the video: first, real screenshots are captured, then animation is added on top. The <strong>fixed capture viewport</strong> becomes the coordinate space the cursor aims at.</p>
+<div class="flow">
+<span>1 · Script (STEPS.md)</span><span class="arr">→</span>
+<span>2 · Text review</span><span class="arr">→</span>
+<span>3 · Capture</span><span class="arr">→</span>
+<span>4 · Project</span><span class="arr">→</span>
+<span>5 · Narration</span><span class="arr">→</span>
+<span>6 · Composition</span><span class="arr">→</span>
+<span>7 · Validate</span><span class="arr">→</span>
+<span>8 · Render</span>
+</div>
+<div class="grid g3" style="margin-top:26px">
+<div class="card"><h3>Script and text</h3><p>5–8 steps + CTA (≈35–50s). Each sentence has <strong>two ways</strong>: <em>screen</em> (accented PT-BR, app buttons in the original spelling — <code>Generate</code>, <code>Upload</code>) e <em>speech</em> (expanded numbers and English rewritten phonetically — <code>upload</code> → “upload”). Review comes before capture and narration.</p></div>
+<div class="card"><h3>Capture and coordinates</h3><p>O <code>capture.mjs</code> read a <code>actions.json</code>, directs the <code>agent-browser</code> through the app, take 1 screenshot per state and record each target's bounding box. Output: <code>assets/shots/*.png</code> + <code>steps.json</code>. You can do it manually when the app is unpredictable (login, dynamic states).</p></div>
+<div class="card"><h3>Composition and rendering</h3><p>O <code>build-demo.mjs</code> read the <code>steps.json</code>, measures the WAVs, and assembles a browser frame + global cursor + highlight + zoom on the result + CTA. Then: <code>lint</code>, <code>inspect</code>, a draft to check the frames and final render at <code>high</code> / 30fps.</p></div>
+</div>
+</div></section>
+<section id="pre"><div class="wrap">
+<span class="chip">Prerequisites</span>
+<h2>What needs to be on the machine</h2>
+<p class="sub">The skill is self-contained (it already includes the sources in <code>assets/fonts/</code>) and does not depend on any other project. It only needs the local runtime and the target app running.</p>
+<div class="grid g3">
+<div class="card"><h3>Node 22+ and FFmpeg</h3><p>HyperFrames foundation (HTML→MP4 rendering) and <code>ffprobe</code>, which measures the narration durations.</p><pre><span class="k">node --version</span>   <span class="c"># needs to be 22+</span>
+<span class="k">ffmpeg -version</span></pre></div>
+<div class="card"><h3>HyperFrames Chrome</h3><p>Headless browser used for rendering. Downloads once and stays cached.</p><pre><span class="k">npx hyperframes browser ensure</span></pre></div>
+<div class="card"><h3>Kokoro TTS (PT-BR)</h3><p>Local narration, voice <code>pf_dora</code>. The first run downloads ~340MB of model data.</p><pre><span class="k">pip install kokoro-onnx soundfile</span></pre></div>
+<div class="card"><h3>agent-browser in PATH</h3><p>Navigation skill (Playwright) that performs the actions and takes real screenshots.</p><pre><span class="k">agent-browser set viewport 1280 800</span></pre></div>
+<div class="card"><h3>The target app running</h3><p>The URL needs to be available during capture — <code>localhost</code> or public. An app with login requires test credentials.</p><pre><span class="c"># e.g.: your app serving at</span>
+<span class="s">http://localhost:8000/</span></pre></div>
+<div class="card"><h3>The installed skill</h3><p>Copy <code>skills/video-demonstrativo/</code> from this repo to your Claude Code skills.</p><pre><span class="k">cp -r</span> skills/video-demonstrativo \
+  <span class="s">~/.claude/skills/</span></pre></div>
+</div>
+</div></section>
+<section id="guia"><div class="wrap">
+<span class="chip">User guide · step by step</span>
+<h2>From STEPS.md to MP4</h2>
+<p class="sub">In practice, you ask Claude Code for the video, and it guides the workflow. Below is what happens behind the scenes — the actual commands, in the order the skill runs them.</p>
+<div class="step"><div class="b">1</div><div>
+<h3>Write the step-by-step script (STEPS.md)</h3>
+<p>The list of actions to demonstrate, with 1 narration sentence per step. Arc: open the app → action 1 → action 2 → … → result → CTA. The 1st step is the home screen (<code>intro:true</code>); the last content item is the result (<code>zoom:true</code>).</p>
+<pre><span class="c"># 5–8 steps + CTA ≈ 35–50s of video</span>
+<span class="c"># e.g.: write prompt → choose 512² → adjust height → Generate → save</span></pre>
+</div></div>
+<div class="step"><div class="b">2</div><div>
+<h3>Review the text before capturing and narrating</h3>
+<p>Check PT-BR accents word by word. Set the two forms for each sentence: <strong>screen</strong> (<code>caption</code> + labels, English in the original spelling) and <strong>speech</strong> (<code>txt/sN.txt</code>, English phonetically). Kokoro phonemizes based on the written spelling—an incorrect accent affects both the screen and narration.</p>
+<pre><span class="c"># screen:  "2 · Choose the size — 512²"     (Generate, Upload in the original spelling)</span>
+<span class="c"># speech:  "Then, choose the size. Let's go with five hundred and twelve."</span>
+<span class="c"># English→PT lexicon: upload→âploud · deploy→deplói · Generate→djenereit</span></pre>
+</div></div>
+<div class="step"><div class="b">3</div><div>
+<h3>Capture the real app</h3>
+<p>Describe the URL, viewport, and steps in a <code>actions.json</code>; the script opens the app, performs each action, takes a screenshot of the state, and gets the target's actual bounding box. Actions: <code>fill</code>, <code>click</code>, <code>clickText</code>, <code>setValue</code>, <code>wait</code>.</p>
+<pre><span class="k">node capture.mjs actions.json</span>   <span class="c"># -&gt; assets/shots/*.png + steps.json</span>
+
+<span class="c"># or manually, when the app is unpredictable (login, dynamic state):</span>
+<span class="k">agent-browser set viewport 1280 800</span>
+<span class="k">agent-browser open</span> <span class="s">http://localhost:8000/</span>
+<span class="k">agent-browser snapshot -i</span>                 <span class="c"># discover refs @e1, @e2...</span>
+<span class="k">agent-browser fill @e6</span> <span class="s">"texto"</span>
+<span class="k">agent-browser screenshot</span> assets/shots/01-prompt.png</pre>
+</div></div>
+<div class="step"><div class="b">4</div><div>
+<h3>Create the video project</h3>
+<p>Everything lives in a single folder at <code>~/projetos/output/&lt;nome&gt;/</code>: project, captures, audio files, <code>index.html</code> and the final MP4. Copy the fonts bundled with the skill (or run the <code>fetch-fonts.mjs</code>) — no CDN in the render.</p>
+<pre><span class="k">cd</span> ~/projetos/output
+<span class="k">npx hyperframes init</span> &lt;nome&gt; <span class="k">--example</span> blank <span class="k">--non-interactive</span>
+
+<span class="c"># fonts: copy assets/fonts/ from the skill, or:</span>
+<span class="k">node fetch-fonts.mjs</span></pre>
+</div></div>
+<div class="step"><div class="b">5</div><div>
+<h3>Generate the narration with Kokoro</h3>
+<p>The template reads the <code>steps.json</code>, writes <code>assets/txt/sN.txt</code> (1 per step + CTA, already in the revised spoken form) and generates the WAVs. At the end, it prints the duration of each track.</p>
+<pre><span class="k">bash narration-template.sh</span>   <span class="c"># -&gt; assets/txt/sN.txt + assets/audio/sN.wav</span>
+
+<span class="c"># under the hood, track by track:</span>
+<span class="k">npx hyperframes tts</span> assets/txt/s1.txt <span class="k">--voice</span> pf_dora <span class="k">--speed</span> 0.98 <span class="k">--output</span> assets/audio/s1.wav</pre>
+</div></div>
+<div class="step"><div class="b">6</div><div>
+<h3>Compose the video</h3>
+<p>Copy <code>scripts/composition-template.mjs</code> how <code>build-demo.mjs</code>. It reads the <code>steps.json</code> and measures the WAVs with <code>ffprobe</code> — browser frame, animated global cursor, highlight, zoom on the result, and INEMA.CLUB CTA are ready to use.</p>
+<pre><span class="k">cp</span> ~/.claude/skills/video-demonstrativo/scripts/composition-template.mjs build-demo.mjs
+<span class="k">node build-demo.mjs</span>   <span class="c"># -&gt; index.html (16:9). Do not edit by hand.</span></pre>
+</div></div>
+<div class="step"><div class="b">7</div><div>
+<h3>Validate before rendering</h3>
+<p>Goal: 0 lint errors and 0 issues in inspect. Animate the <code>.scene-inner</code> (never the wrapper <code>.clip</code>), scenes and captions on alternating tracks, decorative elements and a frame with <code>data-layout-ignore</code>.</p>
+<pre><span class="k">npx hyperframes lint</span>                  <span class="c"># 0 errors</span>
+<span class="k">npx hyperframes inspect --samples 14</span>  <span class="c"># 0 issues</span></pre>
+</div></div>
+<div class="step"><div class="b">8</div><div>
+<h3>Render (draft → high)</h3>
+<p>First, make a draft: extract 1 frame per step and show it to the user — you can't hear the audio, so they validate the narration. Once approved, move on to the final render. The MP4 is saved in the project's own root directory.</p>
+<pre><span class="c"># check</span>
+<span class="k">npx hyperframes render --quality</span> draft
+<span class="k">ffmpeg -nostdin -y -ss</span> 12 <span class="k">-i</span> video.mp4 <span class="k">-vframes</span> 1 <span class="k">-update</span> 1 frame.png
+
+<span class="c"># final</span>
+<span class="k">npx hyperframes render --quality</span> high <span class="k">--fps</span> 30 <span class="k">--output</span> &lt;nome&gt;-16x9.mp4</pre>
+</div></div>
+</div></section>
+<section id="exemplos"><div class="wrap">
+<span class="chip">Examples</span>
+<h2>How a step is described</h2>
+<p class="sub">O <code>actions.json</code> is the capture input; the <code>steps.json</code> is what comes out of it and feeds the composition. Complete examples at <code>scripts/actions.example.json</code> e <code>scripts/steps.example.json</code> — the reference example is a walkthrough of <strong>inemaimg</strong> (image-generation playground) creating an image from scratch.</p>
+<div class="grid g2">
+<div class="card"><h3>Input · actions.json</h3><p style="margin-bottom:.9em">You describe the action and the cursor target. The script handles the rest.</p>
+<pre>{
+  <span class="s">"url"</span>: <span class="s">"http://localhost:8000/"</span>,
+  <span class="s">"viewport"</span>: [1280, 800],
+  <span class="s">"window"</span>: { <span class="s">"urlLabel"</span>: <span class="s">"localhost:8000"</span> },
+  <span class="s">"steps"</span>: [{
+    <span class="s">"id"</span>: <span class="s">"size"</span>,
+    <span class="s">"do"</span>: { <span class="s">"type"</span>: <span class="s">"clickText"</span>, <span class="s">"tag"</span>: <span class="s">"button"</span>, <span class="s">"text"</span>: <span class="s">"512²"</span> },
+    <span class="s">"target"</span>: { <span class="s">"tag"</span>: <span class="s">"button"</span>, <span class="s">"text"</span>: <span class="s">"512²"</span> },
+    <span class="s">"click"</span>: true,
+    <span class="s">"caption"</span>: <span class="s">"2 · Escolha o tamanho — 512²"</span>,
+    <span class="s">"narration"</span>: <span class="s">"Depois, escolha o tamanho. Vamos de quinhentos e doze."</span>
+  }]
+}</pre></div>
+<div class="card"><h3>Output · steps.json</h3><p style="margin-bottom:.9em">The target is now a real coordinate in the screenshot's space. That's what the cursor follows.</p>
+<pre>{
+  <span class="s">"viewport"</span>: [1280, 800],
+  <span class="s">"steps"</span>: [
+    { <span class="s">"shot"</span>: <span class="s">"00-home.png"</span>, <span class="s">"intro"</span>: true, <span class="s">"target"</span>: null },
+    { <span class="s">"shot"</span>: <span class="s">"02-size.png"</span>, <span class="s">"click"</span>: true,
+      <span class="s">"target"</span>: { <span class="s">"x"</span>: 179, <span class="s">"y"</span>: 501, <span class="s">"w"</span>: 44, <span class="s">"h"</span>: 26 } },
+    { <span class="s">"shot"</span>: <span class="s">"04-result.png"</span>, <span class="s">"zoom"</span>: true,
+      <span class="s">"target"</span>: { <span class="s">"x"</span>: 668, <span class="s">"y"</span>: 128, <span class="s">"w"</span>: 484, <span class="s">"h"</span>: 324 } }
+  ]
+}</pre></div>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>🎓 Want the full course?</h3>
+<p>There is an INEMA.CLUB course about this skill — 3 tracks, 10 modules, from the principle "capture first, animate later" to the final render: <a href="https://inematds.github.io/skill-video-demonstrativo/" rel="noopener" target="_blank">inematds.github.io/skill-video-demonstrativo</a>.</p>
+</div>
+</div></section>
+<section id="limites"><div class="wrap">
+<span class="chip">Known limitations</span>
+<h2>What this skill doesn't do (yet)</h2>
+<p class="sub">Be honest before rendering: if your case falls into this category, it's better to know now.</p>
+<div class="grid g4">
+<div class="card"><h3>Static screen</h3><p>The app's dynamic state (animations, video, live data) becomes <strong>static screenshot</strong>. Real motion would require recording the screen video—a different approach, with harder narration sync.</p></div>
+<div class="card"><h3>Login</h3><p>An app with authentication needs test credentials. Without them, capture only the public screens.</p></div>
+<div class="card"><h3>16:9 only</h3><p>Natural format, since app screens are landscape. 9:16 would require cropping and reframing each shot.</p></div>
+<div class="card"><h3>Unacted voice</h3><p>Kokoro is good, but it doesn't act. And you can't hear the result — the user always validates the narration.</p></div>
+</div>
+</div></section>
+<section id="roadmap"><div class="wrap">
+<span class="chip">Roadmap</span>
+<h2>Where it came from and where it’s going</h2>
+<p class="sub">Versioning <code>v1.yy.xxx</code> — <code>yy</code> = feature, <code>xxx</code> = fix. Full history in the <a href="https://github.com/inematds/video-demonstrativo/blob/main/skills/video-demonstrativo/CHANGELOG.md" rel="noopener" target="_blank">CHANGELOG</a>.</p>
+<div class="phase"><div class="tag">1.0.0</div><div class="d"><strong>Initial release</strong><span>Narrated walkthrough of a web app: real capture with <code>agent-browser</code> + HyperFrames + TTS Kokoro, no API key needed. Browser frame, global cursor targeting the actual bounding box, highlight/zoom, and INEMA.CLUB CTA. The principle is "capture first, animate later." Single output at <code>~/projetos/output/&lt;nome&gt;/</code>, with no silent tail (<code>ambientRepeat</code>).</span></div></div>
+<div class="phase"><div class="tag">1.1.0 · current</div><div class="d"><strong>Text review + English pronunciation</strong><span>A new step before capture and narration, closing the gap where text went straight to the screen and TTS without review. A contract with two forms per sentence (on-screen vs. spoken), an English→PT glossary, and the reference <code>revisao-texto.md</code>.</span></div></div>
+<div class="phase"><div class="tag">v3 · future</div><div class="d"><strong>Real motion (screen recording)</strong><span>Alternative path already mapped in the limitations: record the screen with <code>agent-browser record</code> instead of screenshots, to capture animations and live data. The challenge is syncing the narration.</span></div></div>
+</div></section>
+<footer>
+<div class="wrap">
+<div class="pill">agent-browser · Playwright</div><div class="pill">HyperFrames · HTML→MP4</div><div class="pill">Kokoro TTS · pf_dora</div><div class="pill">FFmpeg</div><div class="pill">Node 22+</div>
+<p style="margin-top:18px">video-demonstrativo · Claude Code skill, all local, no API key ·
+      <a href="https://github.com/inematds/video-demonstrativo">inematds/video-demonstrativo</a> ·
+      <a href="https://inematds.github.io/skill-video-demonstrativo/">course</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+</div>
+</footer>
+<script>
+  (function(){
+    var KEY='video-demonstrativo-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

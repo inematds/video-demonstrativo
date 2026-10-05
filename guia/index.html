@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>video-demonstrativo — walkthrough narrado do seu app, a partir do link</title>
-<meta name="description" content="Skill que gera vídeos de demonstração (walkthrough) de uma aplicação web a partir do link do app: navega o app de verdade, captura as telas reais e monta um vídeo narrado com moldura de navegador, cursor animado e zoom. Tudo local, sem chave de API.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<meta content="Skill que gera vídeos de demonstração (walkthrough) de uma aplicação web a partir do link do app: navega o app de verdade, captura as telas reais e monta um vídeo narrado com moldura de navegador, cursor animado e zoom. Tudo local, sem chave de API." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <style>
   :root{
     --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
@@ -90,118 +91,109 @@
   footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
   .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
 </style>
-</head>
-<body>
-
+<link href="https://inematds.github.io/video-demonstrativo/guia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/video-demonstrativo/guia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/video-demonstrativo/guia/es/" hreflang="es" rel="alternate"/></head>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
 <nav><div class="wrap">
-  <a class="brand" href="#top"><span class="emoji">🎬</span> video-demonstrativo</a>
-  <span class="sep">|</span>
-  <span class="clubpro">
-    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
-    <span class="sep">-</span>
-    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
-  </span>
-  <div class="links">
-    <a class="sec" href="#oque">O que é</a>
-    <a class="sec" href="#fluxo">Como funciona</a>
-    <a class="sec" href="#pre">Pré-requisitos</a>
-    <a class="sec" href="#guia">Guia de uso</a>
-    <a class="sec" href="#exemplos">Exemplos</a>
-    <a class="sec" href="#roadmap">Roadmap</a>
-    <button class="tgl" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">🌙</button>
-    <a class="btn" href="https://github.com/inematds/video-demonstrativo" target="_blank" rel="noopener">GitHub</a>
-  </div>
+<a class="brand" href="#top"><span class="emoji">🎬</span> video-demonstrativo</a>
+<span class="sep">|</span>
+<span class="clubpro">
+<a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
+<span class="sep">-</span>
+<a class="pro" href="https://inema.pro" rel="noopener" target="_blank">PRO</a>
+</span>
+<div class="links">
+<a class="sec" href="#oque">O que é</a>
+<a class="sec" href="#fluxo">Como funciona</a>
+<a class="sec" href="#pre">Pré-requisitos</a>
+<a class="sec" href="#guia">Guia de uso</a>
+<a class="sec" href="#exemplos">Exemplos</a>
+<a class="sec" href="#roadmap">Roadmap</a>
+<button aria-label="Alternar tema" class="tgl" id="themeToggle" title="Alternar tema">🌙</button>
+<a class="btn" href="https://github.com/inematds/video-demonstrativo" rel="noopener" target="_blank">GitHub</a>
+</div>
 </div></nav>
-
 <header class="hero" id="top">
-  <div class="glow"></div>
-  <div class="wrap">
-    <div>
-      <span class="chip">Skill · Vídeo / IA · v1.1.0</span>
-      <h1>Do link do app ao <span class="amb">walkthrough narrado</span>.</h1>
-      <p class="lead">Você dá a URL. O Claude Code navega o app de verdade, captura as telas reais passo a passo e monta um vídeo com moldura de navegador, cursor animado e narração. Tudo na máquina, sem chave de API.</p>
-      <div class="cta">
-        <a class="btn" href="#guia">Começar o guia</a>
-        <a class="btn ghost" href="https://github.com/inematds/video-demonstrativo" target="_blank" rel="noopener">Ver no GitHub</a>
-      </div>
-    </div>
-    <figure><img src="assets/hero.png" alt="Capa do projeto video-demonstrativo — vídeo de demonstração de aplicação web"></figure>
-  </div>
+<div class="glow"></div>
+<div class="wrap">
+<div>
+<span class="chip">Skill · Vídeo / IA · v1.1.0</span>
+<h1>Do link do app ao <span class="amb">walkthrough narrado</span>.</h1>
+<p class="lead">Você dá a URL. O Claude Code navega o app de verdade, captura as telas reais passo a passo e monta um vídeo com moldura de navegador, cursor animado e narração. Tudo na máquina, sem chave de API.</p>
+<div class="cta">
+<a class="btn" href="#guia">Começar o guia</a>
+<a class="btn ghost" href="https://github.com/inematds/video-demonstrativo" rel="noopener" target="_blank">Ver no GitHub</a>
+</div>
+</div>
+<figure><img alt="Capa do projeto video-demonstrativo — vídeo de demonstração de aplicação web" src="assets/hero.png"/></figure>
+</div>
 </header>
-
 <section id="oque"><div class="wrap">
-  <span class="chip">O que é</span>
-  <h2>Uma skill que mostra o app real sendo usado</h2>
-  <p class="sub">Não é motion graphics explicando um conceito (isso é a skill <code>video-explicativo</code>): aqui as telas do vídeo <strong>são o seu app</strong>, capturadas de verdade com navegador automatizado. O resultado é um walkthrough em PT-BR de 35–50s, 16:9, que termina na CTA do INEMA.CLUB.</p>
-  <div class="grid g3">
-    <div class="card"><h3>🖱️ Cursor que acerta o botão</h3><p>Na captura, a skill pega a <em>bounding box real</em> de cada alvo com <code>getBoundingClientRect</code>. O cursor animado cai no centro do controle — com pulse e ripple no clique. É isso que faz parecer gravação profissional, e não print com seta por cima.</p></div>
-    <div class="card"><h3>🔒 100% local, sem API key</h3><p>Captura via <code>agent-browser</code> (Playwright), render HTML→MP4 via HyperFrames, narração PT-BR via TTS Kokoro (voz <code>pf_dora</code>) rodando na própria máquina. Nenhuma chamada paga, nenhum serviço externo.</p></div>
-    <div class="card"><h3>⏱️ Timing de fonte única</h3><p>O gerador lê o <code>steps.json</code> e mede a duração de cada WAV com <code>ffprobe</code>. Não existe tabela de tempos na mão: áudio e animação nascem batidos, e os loops de ambiente não deixam cauda muda no fim.</p></div>
-  </div>
+<span class="chip">O que é</span>
+<h2>Uma skill que mostra o app real sendo usado</h2>
+<p class="sub">Não é motion graphics explicando um conceito (isso é a skill <code>video-explicativo</code>): aqui as telas do vídeo <strong>são o seu app</strong>, capturadas de verdade com navegador automatizado. O resultado é um walkthrough em PT-BR de 35–50s, 16:9, que termina na CTA do INEMA.CLUB.</p>
+<div class="grid g3">
+<div class="card"><h3>🖱️ Cursor que acerta o botão</h3><p>Na captura, a skill pega a <em>bounding box real</em> de cada alvo com <code>getBoundingClientRect</code>. O cursor animado cai no centro do controle — com pulse e ripple no clique. É isso que faz parecer gravação profissional, e não print com seta por cima.</p></div>
+<div class="card"><h3>🔒 100% local, sem API key</h3><p>Captura via <code>agent-browser</code> (Playwright), render HTML→MP4 via HyperFrames, narração PT-BR via TTS Kokoro (voz <code>pf_dora</code>) rodando na própria máquina. Nenhuma chamada paga, nenhum serviço externo.</p></div>
+<div class="card"><h3>⏱️ Timing de fonte única</h3><p>O gerador lê o <code>steps.json</code> e mede a duração de cada WAV com <code>ffprobe</code>. Não existe tabela de tempos na mão: áudio e animação nascem batidos, e os loops de ambiente não deixam cauda muda no fim.</p></div>
+</div>
 </div></section>
-
 <section id="fluxo"><div class="wrap">
-  <span class="chip">Como funciona</span>
-  <h2>Capturar antes, animar depois</h2>
-  <p class="sub">O render do HyperFrames é determinístico — sem rede durante a renderização. Por isso o site nunca é carregado ao vivo dentro do vídeo: primeiro captura-se os screenshots reais, depois anima-se por cima. O <strong>viewport fixo da captura</strong> vira o espaço de coordenadas onde o cursor mira.</p>
-  <div class="flow">
-    <span>1 · Roteiro (STEPS.md)</span><span class="arr">→</span>
-    <span>2 · Revisão de texto</span><span class="arr">→</span>
-    <span>3 · Captura</span><span class="arr">→</span>
-    <span>4 · Projeto</span><span class="arr">→</span>
-    <span>5 · Narração</span><span class="arr">→</span>
-    <span>6 · Composição</span><span class="arr">→</span>
-    <span>7 · Validar</span><span class="arr">→</span>
-    <span>8 · Render</span>
-  </div>
-  <div class="grid g3" style="margin-top:26px">
-    <div class="card"><h3>Roteiro e texto</h3><p>5–8 passos + CTA (≈35–50s). Cada frase tem <strong>duas formas</strong>: <em>tela</em> (PT-BR acentuado, botões do app na grafia original — <code>Generate</code>, <code>Upload</code>) e <em>fala</em> (números expandidos e inglês reescrito foneticamente — <code>upload</code> → "âploud"). A revisão vem antes de capturar e narrar.</p></div>
-    <div class="card"><h3>Captura e coordenadas</h3><p>O <code>capture.mjs</code> lê um <code>actions.json</code>, dirige o <code>agent-browser</code> pelo app, tira 1 screenshot por estado e grava a bounding box de cada alvo. Saída: <code>assets/shots/*.png</code> + <code>steps.json</code>. Dá pra fazer na mão quando o app é imprevisível (login, estados dinâmicos).</p></div>
-    <div class="card"><h3>Composição e render</h3><p>O <code>build-demo.mjs</code> lê o <code>steps.json</code>, mede os WAVs e monta moldura de navegador + cursor global + destaque + zoom no resultado + CTA. Depois: <code>lint</code>, <code>inspect</code>, draft pra conferir frames e render final em <code>high</code> / 30fps.</p></div>
-  </div>
+<span class="chip">Como funciona</span>
+<h2>Capturar antes, animar depois</h2>
+<p class="sub">O render do HyperFrames é determinístico — sem rede durante a renderização. Por isso o site nunca é carregado ao vivo dentro do vídeo: primeiro captura-se os screenshots reais, depois anima-se por cima. O <strong>viewport fixo da captura</strong> vira o espaço de coordenadas onde o cursor mira.</p>
+<div class="flow">
+<span>1 · Roteiro (STEPS.md)</span><span class="arr">→</span>
+<span>2 · Revisão de texto</span><span class="arr">→</span>
+<span>3 · Captura</span><span class="arr">→</span>
+<span>4 · Projeto</span><span class="arr">→</span>
+<span>5 · Narração</span><span class="arr">→</span>
+<span>6 · Composição</span><span class="arr">→</span>
+<span>7 · Validar</span><span class="arr">→</span>
+<span>8 · Render</span>
+</div>
+<div class="grid g3" style="margin-top:26px">
+<div class="card"><h3>Roteiro e texto</h3><p>5–8 passos + CTA (≈35–50s). Cada frase tem <strong>duas formas</strong>: <em>tela</em> (PT-BR acentuado, botões do app na grafia original — <code>Generate</code>, <code>Upload</code>) e <em>fala</em> (números expandidos e inglês reescrito foneticamente — <code>upload</code> → "âploud"). A revisão vem antes de capturar e narrar.</p></div>
+<div class="card"><h3>Captura e coordenadas</h3><p>O <code>capture.mjs</code> lê um <code>actions.json</code>, dirige o <code>agent-browser</code> pelo app, tira 1 screenshot por estado e grava a bounding box de cada alvo. Saída: <code>assets/shots/*.png</code> + <code>steps.json</code>. Dá pra fazer na mão quando o app é imprevisível (login, estados dinâmicos).</p></div>
+<div class="card"><h3>Composição e render</h3><p>O <code>build-demo.mjs</code> lê o <code>steps.json</code>, mede os WAVs e monta moldura de navegador + cursor global + destaque + zoom no resultado + CTA. Depois: <code>lint</code>, <code>inspect</code>, draft pra conferir frames e render final em <code>high</code> / 30fps.</p></div>
+</div>
 </div></section>
-
 <section id="pre"><div class="wrap">
-  <span class="chip">Pré-requisitos</span>
-  <h2>O que precisa estar na máquina</h2>
-  <p class="sub">A skill é auto-contida (já traz as fontes em <code>assets/fonts/</code>) e não depende de nenhum outro projeto. Só precisa do runtime local e do app-alvo no ar.</p>
-  <div class="grid g3">
-    <div class="card"><h3>Node 22+ e FFmpeg</h3><p>Base do HyperFrames (render HTML→MP4) e do <code>ffprobe</code>, que mede as durações da narração.</p><pre><span class="k">node --version</span>   <span class="c"># precisa ser 22+</span>
+<span class="chip">Pré-requisitos</span>
+<h2>O que precisa estar na máquina</h2>
+<p class="sub">A skill é auto-contida (já traz as fontes em <code>assets/fonts/</code>) e não depende de nenhum outro projeto. Só precisa do runtime local e do app-alvo no ar.</p>
+<div class="grid g3">
+<div class="card"><h3>Node 22+ e FFmpeg</h3><p>Base do HyperFrames (render HTML→MP4) e do <code>ffprobe</code>, que mede as durações da narração.</p><pre><span class="k">node --version</span>   <span class="c"># precisa ser 22+</span>
 <span class="k">ffmpeg -version</span></pre></div>
-    <div class="card"><h3>Chrome do HyperFrames</h3><p>Navegador headless usado pelo render. Baixa uma vez e fica cacheado.</p><pre><span class="k">npx hyperframes browser ensure</span></pre></div>
-    <div class="card"><h3>TTS Kokoro (PT-BR)</h3><p>Narração local, voz <code>pf_dora</code>. A primeira execução baixa ~340MB de modelo.</p><pre><span class="k">pip install kokoro-onnx soundfile</span></pre></div>
-    <div class="card"><h3>agent-browser no PATH</h3><p>Skill de navegação (Playwright) que executa as ações e tira os screenshots reais.</p><pre><span class="k">agent-browser set viewport 1280 800</span></pre></div>
-    <div class="card"><h3>O app-alvo no ar</h3><p>A URL precisa responder durante a captura — <code>localhost</code> ou público. App com login exige credenciais de teste.</p><pre><span class="c"># ex.: seu app servindo em</span>
+<div class="card"><h3>Chrome do HyperFrames</h3><p>Navegador headless usado pelo render. Baixa uma vez e fica cacheado.</p><pre><span class="k">npx hyperframes browser ensure</span></pre></div>
+<div class="card"><h3>TTS Kokoro (PT-BR)</h3><p>Narração local, voz <code>pf_dora</code>. A primeira execução baixa ~340MB de modelo.</p><pre><span class="k">pip install kokoro-onnx soundfile</span></pre></div>
+<div class="card"><h3>agent-browser no PATH</h3><p>Skill de navegação (Playwright) que executa as ações e tira os screenshots reais.</p><pre><span class="k">agent-browser set viewport 1280 800</span></pre></div>
+<div class="card"><h3>O app-alvo no ar</h3><p>A URL precisa responder durante a captura — <code>localhost</code> ou público. App com login exige credenciais de teste.</p><pre><span class="c"># ex.: seu app servindo em</span>
 <span class="s">http://localhost:8000/</span></pre></div>
-    <div class="card"><h3>A skill instalada</h3><p>Copie <code>skills/video-demonstrativo/</code> deste repo para as suas skills do Claude Code.</p><pre><span class="k">cp -r</span> skills/video-demonstrativo \
+<div class="card"><h3>A skill instalada</h3><p>Copie <code>skills/video-demonstrativo/</code> deste repo para as suas skills do Claude Code.</p><pre><span class="k">cp -r</span> skills/video-demonstrativo \
   <span class="s">~/.claude/skills/</span></pre></div>
-  </div>
+</div>
 </div></section>
-
 <section id="guia"><div class="wrap">
-  <span class="chip">Guia de uso · passo a passo</span>
-  <h2>Do STEPS.md ao MP4</h2>
-  <p class="sub">Na prática você pede o vídeo ao Claude Code e ele conduz o fluxo. Abaixo, o que acontece por baixo — os comandos reais, na ordem em que a skill os executa.</p>
-
-  <div class="step"><div class="b">1</div><div>
-    <h3>Escreva o roteiro de passos (STEPS.md)</h3>
-    <p>A lista de ações a demonstrar, com 1 frase de narração por passo. Arco: abrir o app → ação 1 → ação 2 → … → resultado → CTA. O 1º passo é a tela inicial (<code>intro:true</code>); o último de conteúdo é o resultado (<code>zoom:true</code>).</p>
+<span class="chip">Guia de uso · passo a passo</span>
+<h2>Do STEPS.md ao MP4</h2>
+<p class="sub">Na prática você pede o vídeo ao Claude Code e ele conduz o fluxo. Abaixo, o que acontece por baixo — os comandos reais, na ordem em que a skill os executa.</p>
+<div class="step"><div class="b">1</div><div>
+<h3>Escreva o roteiro de passos (STEPS.md)</h3>
+<p>A lista de ações a demonstrar, com 1 frase de narração por passo. Arco: abrir o app → ação 1 → ação 2 → … → resultado → CTA. O 1º passo é a tela inicial (<code>intro:true</code>); o último de conteúdo é o resultado (<code>zoom:true</code>).</p>
 <pre><span class="c"># 5–8 passos + CTA ≈ 35–50s de vídeo</span>
 <span class="c"># ex.: escrever prompt → escolher 512² → ajustar altura → Gerar → salvar</span></pre>
-  </div></div>
-
-  <div class="step"><div class="b">2</div><div>
-    <h3>Revise o texto antes de capturar e narrar</h3>
-    <p>Varra a acentuação PT-BR palavra a palavra. Fixe as duas formas de cada frase: <strong>tela</strong> (<code>caption</code> + labels, inglês na grafia original) e <strong>fala</strong> (<code>txt/sN.txt</code>, inglês foneticamente). O Kokoro fonemiza pela grafia escrita — acento errado contamina tela e locução.</p>
+</div></div>
+<div class="step"><div class="b">2</div><div>
+<h3>Revise o texto antes de capturar e narrar</h3>
+<p>Varra a acentuação PT-BR palavra a palavra. Fixe as duas formas de cada frase: <strong>tela</strong> (<code>caption</code> + labels, inglês na grafia original) e <strong>fala</strong> (<code>txt/sN.txt</code>, inglês foneticamente). O Kokoro fonemiza pela grafia escrita — acento errado contamina tela e locução.</p>
 <pre><span class="c"># tela:  "2 · Escolha o tamanho — 512²"     (Generate, Upload na grafia original)</span>
 <span class="c"># fala:  "Depois, escolha o tamanho. Vamos de quinhentos e doze."</span>
 <span class="c"># léxico inglês→PT: upload→âploud · deploy→deplói · Generate→djenereit</span></pre>
-  </div></div>
-
-  <div class="step"><div class="b">3</div><div>
-    <h3>Capture o app real</h3>
-    <p>Descreva URL, viewport e passos num <code>actions.json</code>; o script abre o app, executa cada ação, tira o screenshot do estado e pega a bounding box real do alvo. Ações: <code>fill</code>, <code>click</code>, <code>clickText</code>, <code>setValue</code>, <code>wait</code>.</p>
-<pre><span class="k">node capture.mjs actions.json</span>   <span class="c"># -> assets/shots/*.png + steps.json</span>
+</div></div>
+<div class="step"><div class="b">3</div><div>
+<h3>Capture o app real</h3>
+<p>Descreva URL, viewport e passos num <code>actions.json</code>; o script abre o app, executa cada ação, tira o screenshot do estado e pega a bounding box real do alvo. Ações: <code>fill</code>, <code>click</code>, <code>clickText</code>, <code>setValue</code>, <code>wait</code>.</p>
+<pre><span class="k">node capture.mjs actions.json</span>   <span class="c"># -&gt; assets/shots/*.png + steps.json</span>
 
 <span class="c"># ou na mão, quando o app é imprevisível (login, estado dinâmico):</span>
 <span class="k">agent-browser set viewport 1280 800</span>
@@ -209,59 +201,53 @@
 <span class="k">agent-browser snapshot -i</span>                 <span class="c"># descobre refs @e1, @e2...</span>
 <span class="k">agent-browser fill @e6</span> <span class="s">"texto"</span>
 <span class="k">agent-browser screenshot</span> assets/shots/01-prompt.png</pre>
-  </div></div>
-
-  <div class="step"><div class="b">4</div><div>
-    <h3>Crie o projeto de vídeo</h3>
-    <p>Tudo vive numa pasta única em <code>~/projetos/output/&lt;nome&gt;/</code>: projeto, captures, áudios, <code>index.html</code> e o MP4 final. Copie as fontes embutidas na skill (ou rode o <code>fetch-fonts.mjs</code>) — sem CDN no render.</p>
+</div></div>
+<div class="step"><div class="b">4</div><div>
+<h3>Crie o projeto de vídeo</h3>
+<p>Tudo vive numa pasta única em <code>~/projetos/output/&lt;nome&gt;/</code>: projeto, captures, áudios, <code>index.html</code> e o MP4 final. Copie as fontes embutidas na skill (ou rode o <code>fetch-fonts.mjs</code>) — sem CDN no render.</p>
 <pre><span class="k">cd</span> ~/projetos/output
 <span class="k">npx hyperframes init</span> &lt;nome&gt; <span class="k">--example</span> blank <span class="k">--non-interactive</span>
 
 <span class="c"># fontes: copie assets/fonts/ da skill, ou:</span>
 <span class="k">node fetch-fonts.mjs</span></pre>
-  </div></div>
-
-  <div class="step"><div class="b">5</div><div>
-    <h3>Gere a narração com o Kokoro</h3>
-    <p>O template lê o <code>steps.json</code>, escreve <code>assets/txt/sN.txt</code> (1 por passo + CTA, já na forma-fala revisada) e gera os WAVs. Ao final imprime a duração de cada faixa.</p>
-<pre><span class="k">bash narration-template.sh</span>   <span class="c"># -> assets/txt/sN.txt + assets/audio/sN.wav</span>
+</div></div>
+<div class="step"><div class="b">5</div><div>
+<h3>Gere a narração com o Kokoro</h3>
+<p>O template lê o <code>steps.json</code>, escreve <code>assets/txt/sN.txt</code> (1 por passo + CTA, já na forma-fala revisada) e gera os WAVs. Ao final imprime a duração de cada faixa.</p>
+<pre><span class="k">bash narration-template.sh</span>   <span class="c"># -&gt; assets/txt/sN.txt + assets/audio/sN.wav</span>
 
 <span class="c"># por baixo, faixa a faixa:</span>
 <span class="k">npx hyperframes tts</span> assets/txt/s1.txt <span class="k">--voice</span> pf_dora <span class="k">--speed</span> 0.98 <span class="k">--output</span> assets/audio/s1.wav</pre>
-  </div></div>
-
-  <div class="step"><div class="b">6</div><div>
-    <h3>Componha o vídeo</h3>
-    <p>Copie <code>scripts/composition-template.mjs</code> como <code>build-demo.mjs</code>. Ele lê o <code>steps.json</code> e mede os WAVs com <code>ffprobe</code> — moldura de navegador, cursor global animado, destaque, zoom no resultado e CTA do INEMA.CLUB já vêm prontos.</p>
+</div></div>
+<div class="step"><div class="b">6</div><div>
+<h3>Componha o vídeo</h3>
+<p>Copie <code>scripts/composition-template.mjs</code> como <code>build-demo.mjs</code>. Ele lê o <code>steps.json</code> e mede os WAVs com <code>ffprobe</code> — moldura de navegador, cursor global animado, destaque, zoom no resultado e CTA do INEMA.CLUB já vêm prontos.</p>
 <pre><span class="k">cp</span> ~/.claude/skills/video-demonstrativo/scripts/composition-template.mjs build-demo.mjs
-<span class="k">node build-demo.mjs</span>   <span class="c"># -> index.html (16:9). Não editar à mão.</span></pre>
-  </div></div>
-
-  <div class="step"><div class="b">7</div><div>
-    <h3>Valide antes de renderizar</h3>
-    <p>Meta: 0 erros no lint e 0 problemas no inspect. Anime o <code>.scene-inner</code> (nunca o wrapper <code>.clip</code>), cenas e captions em tracks alternados, decorativos e moldura com <code>data-layout-ignore</code>.</p>
+<span class="k">node build-demo.mjs</span>   <span class="c"># -&gt; index.html (16:9). Não editar à mão.</span></pre>
+</div></div>
+<div class="step"><div class="b">7</div><div>
+<h3>Valide antes de renderizar</h3>
+<p>Meta: 0 erros no lint e 0 problemas no inspect. Anime o <code>.scene-inner</code> (nunca o wrapper <code>.clip</code>), cenas e captions em tracks alternados, decorativos e moldura com <code>data-layout-ignore</code>.</p>
 <pre><span class="k">npx hyperframes lint</span>                  <span class="c"># 0 erros</span>
 <span class="k">npx hyperframes inspect --samples 14</span>  <span class="c"># 0 problemas</span></pre>
-  </div></div>
-
-  <div class="step"><div class="b">8</div><div>
-    <h3>Renderize (draft → high)</h3>
-    <p>Primeiro um draft: extraia 1 frame por passo e mostre ao usuário — você não escuta o áudio, então quem valida a locução é ele. Aprovado, vai pro render final. O MP4 sai na raiz do próprio projeto.</p>
+</div></div>
+<div class="step"><div class="b">8</div><div>
+<h3>Renderize (draft → high)</h3>
+<p>Primeiro um draft: extraia 1 frame por passo e mostre ao usuário — você não escuta o áudio, então quem valida a locução é ele. Aprovado, vai pro render final. O MP4 sai na raiz do próprio projeto.</p>
 <pre><span class="c"># confere</span>
 <span class="k">npx hyperframes render --quality</span> draft
 <span class="k">ffmpeg -nostdin -y -ss</span> 12 <span class="k">-i</span> video.mp4 <span class="k">-vframes</span> 1 <span class="k">-update</span> 1 frame.png
 
 <span class="c"># final</span>
 <span class="k">npx hyperframes render --quality</span> high <span class="k">--fps</span> 30 <span class="k">--output</span> &lt;nome&gt;-16x9.mp4</pre>
-  </div></div>
+</div></div>
 </div></section>
-
 <section id="exemplos"><div class="wrap">
-  <span class="chip">Exemplos</span>
-  <h2>Como um passo é descrito</h2>
-  <p class="sub">O <code>actions.json</code> é a entrada da captura; o <code>steps.json</code> é o que sai dela e alimenta a composição. Exemplos completos em <code>scripts/actions.example.json</code> e <code>scripts/steps.example.json</code> — o caso de referência é um walkthrough do <strong>inemaimg</strong> (playground de geração de imagem) gerando uma imagem do zero.</p>
-  <div class="grid g2">
-    <div class="card"><h3>Entrada · actions.json</h3><p style="margin-bottom:.9em">Você descreve a ação e o alvo do cursor. O script resolve o resto.</p>
+<span class="chip">Exemplos</span>
+<h2>Como um passo é descrito</h2>
+<p class="sub">O <code>actions.json</code> é a entrada da captura; o <code>steps.json</code> é o que sai dela e alimenta a composição. Exemplos completos em <code>scripts/actions.example.json</code> e <code>scripts/steps.example.json</code> — o caso de referência é um walkthrough do <strong>inemaimg</strong> (playground de geração de imagem) gerando uma imagem do zero.</p>
+<div class="grid g2">
+<div class="card"><h3>Entrada · actions.json</h3><p style="margin-bottom:.9em">Você descreve a ação e o alvo do cursor. O script resolve o resto.</p>
 <pre>{
   <span class="s">"url"</span>: <span class="s">"http://localhost:8000/"</span>,
   <span class="s">"viewport"</span>: [1280, 800],
@@ -275,7 +261,7 @@
     <span class="s">"narration"</span>: <span class="s">"Depois, escolha o tamanho. Vamos de quinhentos e doze."</span>
   }]
 }</pre></div>
-    <div class="card"><h3>Saída · steps.json</h3><p style="margin-bottom:.9em">O alvo virou coordenada real, no espaço do screenshot. É o que o cursor persegue.</p>
+<div class="card"><h3>Saída · steps.json</h3><p style="margin-bottom:.9em">O alvo virou coordenada real, no espaço do screenshot. É o que o cursor persegue.</p>
 <pre>{
   <span class="s">"viewport"</span>: [1280, 800],
   <span class="s">"steps"</span>: [
@@ -286,44 +272,40 @@
       <span class="s">"target"</span>: { <span class="s">"x"</span>: 668, <span class="s">"y"</span>: 128, <span class="s">"w"</span>: 484, <span class="s">"h"</span>: 324 } }
   ]
 }</pre></div>
-  </div>
-  <div class="card" style="margin-top:18px">
-    <h3>🎓 Quer o curso completo?</h3>
-    <p>Existe um curso INEMA.CLUB sobre esta skill — 3 trilhas, 10 módulos, do princípio "capturar antes, animar depois" até o render final: <a href="https://inematds.github.io/skill-video-demonstrativo/" target="_blank" rel="noopener">inematds.github.io/skill-video-demonstrativo</a>.</p>
-  </div>
+</div>
+<div class="card" style="margin-top:18px">
+<h3>🎓 Quer o curso completo?</h3>
+<p>Existe um curso INEMA.CLUB sobre esta skill — 3 trilhas, 10 módulos, do princípio "capturar antes, animar depois" até o render final: <a href="https://inematds.github.io/skill-video-demonstrativo/" rel="noopener" target="_blank">inematds.github.io/skill-video-demonstrativo</a>.</p>
+</div>
 </div></section>
-
 <section id="limites"><div class="wrap">
-  <span class="chip">Limites conhecidos</span>
-  <h2>O que esta skill não faz (ainda)</h2>
-  <p class="sub">Honestidade antes do render: se o seu caso cair aqui, é melhor saber agora.</p>
-  <div class="grid g4">
-    <div class="card"><h3>Tela estática</h3><p>Estado dinâmico do app (animações, vídeo, dados ao vivo) vira <strong>print estático</strong>. Movimento real exigiria gravar vídeo da tela — outro caminho, com sincronia de narração mais difícil.</p></div>
-    <div class="card"><h3>Login</h3><p>App com autenticação precisa de credenciais de teste. Sem elas, capture só as telas públicas.</p></div>
-    <div class="card"><h3>Só 16:9</h3><p>Formato natural, porque telas de app são landscape. 9:16 exigiria recortar e reenquadrar cada shot.</p></div>
-    <div class="card"><h3>Voz sem atuação</h3><p>O Kokoro é bom, mas não atua. E você não escuta o resultado — quem valida a locução é sempre o usuário.</p></div>
-  </div>
+<span class="chip">Limites conhecidos</span>
+<h2>O que esta skill não faz (ainda)</h2>
+<p class="sub">Honestidade antes do render: se o seu caso cair aqui, é melhor saber agora.</p>
+<div class="grid g4">
+<div class="card"><h3>Tela estática</h3><p>Estado dinâmico do app (animações, vídeo, dados ao vivo) vira <strong>print estático</strong>. Movimento real exigiria gravar vídeo da tela — outro caminho, com sincronia de narração mais difícil.</p></div>
+<div class="card"><h3>Login</h3><p>App com autenticação precisa de credenciais de teste. Sem elas, capture só as telas públicas.</p></div>
+<div class="card"><h3>Só 16:9</h3><p>Formato natural, porque telas de app são landscape. 9:16 exigiria recortar e reenquadrar cada shot.</p></div>
+<div class="card"><h3>Voz sem atuação</h3><p>O Kokoro é bom, mas não atua. E você não escuta o resultado — quem valida a locução é sempre o usuário.</p></div>
+</div>
 </div></section>
-
 <section id="roadmap"><div class="wrap">
-  <span class="chip">Roadmap</span>
-  <h2>De onde veio e pra onde vai</h2>
-  <p class="sub">Versionamento <code>v1.yy.xxx</code> — <code>yy</code> = recurso, <code>xxx</code> = correção. Histórico completo no <a href="https://github.com/inematds/video-demonstrativo/blob/main/skills/video-demonstrativo/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a>.</p>
-  <div class="phase"><div class="tag">1.0.0</div><div class="d"><strong>Release inicial</strong><span>Walkthrough narrado de app web: captura real com <code>agent-browser</code> + HyperFrames + TTS Kokoro, sem chave de API. Moldura de navegador, cursor global mirando a bounding box real, destaque/zoom e CTA do INEMA.CLUB. Princípio "capturar antes, animar depois". Saída única em <code>~/projetos/output/&lt;nome&gt;/</code>, sem cauda muda (<code>ambientRepeat</code>).</span></div></div>
-  <div class="phase"><div class="tag">1.1.0 · atual</div><div class="d"><strong>Revisão de texto + pronúncia de inglês</strong><span>Nova etapa antes de captura e narração, fechando o buraco do texto que ia direto pra tela e pro TTS sem revisão. Contrato de duas formas por frase (tela vs fala), léxico inglês→PT e a referência <code>revisao-texto.md</code>.</span></div></div>
-  <div class="phase"><div class="tag">v3 · futuro</div><div class="d"><strong>Movimento real (gravação de tela)</strong><span>Caminho alternativo já mapeado nos limites: gravar vídeo da tela com <code>agent-browser record</code> em vez de screenshots, pra capturar animações e dados ao vivo. O desafio é a sincronia da narração.</span></div></div>
+<span class="chip">Roadmap</span>
+<h2>De onde veio e pra onde vai</h2>
+<p class="sub">Versionamento <code>v1.yy.xxx</code> — <code>yy</code> = recurso, <code>xxx</code> = correção. Histórico completo no <a href="https://github.com/inematds/video-demonstrativo/blob/main/skills/video-demonstrativo/CHANGELOG.md" rel="noopener" target="_blank">CHANGELOG</a>.</p>
+<div class="phase"><div class="tag">1.0.0</div><div class="d"><strong>Release inicial</strong><span>Walkthrough narrado de app web: captura real com <code>agent-browser</code> + HyperFrames + TTS Kokoro, sem chave de API. Moldura de navegador, cursor global mirando a bounding box real, destaque/zoom e CTA do INEMA.CLUB. Princípio "capturar antes, animar depois". Saída única em <code>~/projetos/output/&lt;nome&gt;/</code>, sem cauda muda (<code>ambientRepeat</code>).</span></div></div>
+<div class="phase"><div class="tag">1.1.0 · atual</div><div class="d"><strong>Revisão de texto + pronúncia de inglês</strong><span>Nova etapa antes de captura e narração, fechando o buraco do texto que ia direto pra tela e pro TTS sem revisão. Contrato de duas formas por frase (tela vs fala), léxico inglês→PT e a referência <code>revisao-texto.md</code>.</span></div></div>
+<div class="phase"><div class="tag">v3 · futuro</div><div class="d"><strong>Movimento real (gravação de tela)</strong><span>Caminho alternativo já mapeado nos limites: gravar vídeo da tela com <code>agent-browser record</code> em vez de screenshots, pra capturar animações e dados ao vivo. O desafio é a sincronia da narração.</span></div></div>
 </div></section>
-
 <footer>
-  <div class="wrap">
-    <div class="pill">agent-browser · Playwright</div><div class="pill">HyperFrames · HTML→MP4</div><div class="pill">Kokoro TTS · pf_dora</div><div class="pill">FFmpeg</div><div class="pill">Node 22+</div>
-    <p style="margin-top:18px">video-demonstrativo · skill do Claude Code, tudo local, sem chave de API ·
+<div class="wrap">
+<div class="pill">agent-browser · Playwright</div><div class="pill">HyperFrames · HTML→MP4</div><div class="pill">Kokoro TTS · pf_dora</div><div class="pill">FFmpeg</div><div class="pill">Node 22+</div>
+<p style="margin-top:18px">video-demonstrativo · skill do Claude Code, tudo local, sem chave de API ·
       <a href="https://github.com/inematds/video-demonstrativo">inematds/video-demonstrativo</a> ·
       <a href="https://inematds.github.io/skill-video-demonstrativo/">curso</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
-  </div>
+</div>
 </footer>
-
 <script>
   (function(){
     var KEY='video-demonstrativo-theme';
